@@ -1,0 +1,439 @@
+/* ===============================
+   SMARTPARK - MODERN UI THEME
+================================= */
+
+/* ---------- Root Colors ---------- */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --secondary: #64748b;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+
+  --bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+  --text: #1e293b;
+  --muted: #64748b;
+}
+
+/* ---------- Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===============================
+   TOPBAR
+================================= */
+.topbar {
+  background: var(--primary);
+  color: white;
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  gap: 8px;
+}
+
+.topbar-brand svg {
+  width: 22px;
+  height: 22px;
+}
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-user {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   CONTAINERS
+================================= */
+.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.container-sm {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* ===============================
+   CARDS
+================================= */
+.card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  padding: 22px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  gap: 10px;
+}
+
+.card-icon {
+  font-size: 18px;
+}
+
+/* ===============================
+   FORMS
+================================= */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.required {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ===============================
+   BUTTONS
+================================= */
+button, .btn {
+  padding: 9px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  opacity: 0.9;
+}
+
+.btn-sm {
+  font-size: 13px;
+  padding: 6px 10px;
+}
+
+.btn-full {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.btn-full:hover {
+  background: var(--primary-dark);
+}
+
+/* ===============================
+   TABLE
+================================= */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f1f5f9;
+}
+
+th, td {
+  padding: 12px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: 600;
+}
+
+/* ===============================
+   STATUS BADGES
+================================= */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-pending {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.badge-completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ===============================
+   AUTH PAGES
+================================= */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.auth-logo {
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--primary);
+}
+
+.auth-logo svg {
+  width: 22px;
+  height: 22px;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.auth-footer {
+  margin-top: 18px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.auth-footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* ===============================
+   MESSAGES
+================================= */
+.message {
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  display: none;
+}
+
+.message.success {
+  background: #dcfce7;
+  color: #166534;
+  display: block;
+}
+
+.message.error {
+  background: #fee2e2;
+  color: #991b1b;
+  display: block;
+}
+
+/* ===============================
+   STAR RATING
+================================= */
+.stars {
+  display: flex;
+  gap: 6px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.star {
+  color: #cbd5e1;
+  transition: 0.2s;
+}
+
+.star.on {
+  color: #f59e0b;
+}
+
+/* ===============================
+   GRID
+================================= */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* parking slots list */
+.slot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.slot-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .slot-card { width: calc(50% - 20px); }
+}
+
+@media (max-width: 480px) {
+  .slot-card { width: 100%; }
+}
+
+/* ===============================
+   UTILITIES
+================================= */
+.small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .topbar-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .container {
+    margin-top: 20px;
+  }
+}

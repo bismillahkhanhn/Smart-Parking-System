@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment – SmartPark</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="topbar-brand">SmartPark</a>
+  <div class="topbar-nav">
+    <a href="/user-dashboard" class="btn btn-secondary btn-sm">Dashboard</a>
+    <a href="/rating" class="btn btn-secondary btn-sm">Rate</a>
+  </div>
+</div>
+
+<div class="container-sm">
+
+  <div class="card payment-card">
+
+    <div class="card-header">
+      <div class="card-title">💳 Complete Your Payment</div>
+    </div>
+
+    <div id="msg" class="message"></div>
+
+    <form id="paymentForm">
+
+      <div class="form-group">
+        <label>Booking Reference <span class="required">*</span></label>
+        <input id="bookingId" type="number" placeholder="e.g. 5" min="1" required>
+        <div class="small">Found in your dashboard bookings table</div>
+      </div>
+
+      <div class="form-group">
+        <label>Total Amount (₹) <span class="required">*</span></label>
+        <input id="amount" type="number" step="0.01" min="1" placeholder="500.00" required>
+        <div class="small">Price per hour × duration</div>
+      </div>
+
+      <button type="submit" class="btn-full pay-btn">
+        💳 Complete Payment →
+      </button>
+
+    </form>
+
+  </div>
+
+  <div class="hint payment-hint">
+    <strong>ℹ️ Payment Info:</strong><br>
+    Only <span class="badge badge-approved">APPROVED</span> bookings can be paid<br>
+    After payment → status becomes <span class="badge badge-completed">COMPLETED</span><br>
+    Then you can <a href="#"><strong>leave a rating</strong></a>
+  </div>
+
+</div>
+
+<script src="/js/payment.js"></script>
+</body>
+</html>

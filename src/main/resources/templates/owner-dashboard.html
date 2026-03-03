@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owner Dashboard – SmartPark</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="topbar-brand">SmartPark</a>
+  <div class="topbar-nav">
+    <span id="currentUser" class="topbar-user"></span>
+    <button id="logoutBtn" class="btn btn-danger btn-sm">Logout</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <div id="msg" class="message"></div>
+
+  <!-- SIMPLE ANALYTICS -->
+  <div class="dashboard-stats">
+    <div class="stat-box">
+      <div class="stat-number" id="statTotal">–</div>
+      <div class="stat-text">📊 Total Bookings</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="statRevenue">–</div>
+      <div class="stat-text">💰 Total Revenue</div>
+    </div>
+  </div>
+
+  <!-- ADD SLOT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">➕ Add New Parking Slot</div>
+    </div>
+
+    <form id="addSlotForm">
+      <input id="ownerId" type="hidden">
+
+      <div class="form-group">
+        <label>Location / Address <span class="required">*</span></label>
+        <input id="location" placeholder="Ground Floor, Block A, Sector 5" required>
+        <div class="small">Full address visible to customers</div>
+      </div>
+
+      <div class="form-group">
+        <label>Price per Hour (₹) <span class="required">*</span></label>
+        <input id="price" type="number" step="0.01" min="1" placeholder="50.00" required>
+        <div class="small">Customers will see this rate</div>
+      </div>
+
+      <button type="submit" class="btn-full">Create Slot</button>
+    </form>
+  </div>
+
+  <!-- MY SLOTS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">🅿️ My Parking Slots</div>
+      <button class="btn btn-secondary btn-sm" onclick="loadOwnerSlots()">↻ Refresh</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Edit</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="ownerSlotsBody">
+        <tr>
+          <td colspan="6" class="empty-row">No slots added yet</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BOOKINGS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📋 Booking Requests</div>
+      <button class="btn btn-secondary btn-sm" onclick="loadOwnerBookings()">↻ Refresh</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Slot</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>✔/✖ Action</th>
+        </tr>
+        </thead>
+        <tbody id="ownerBookingsBody">
+        <tr>
+          <td colspan="6" class="empty-row">No bookings yet. Good thing to come!</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

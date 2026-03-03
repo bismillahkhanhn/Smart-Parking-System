@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register – SmartPark</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card">
+
+    <!-- Logo Text -->
+    <div class="auth-logo">
+      SmartPark
+    </div>
+
+    <div id="msg" class="message"></div>
+
+    <!-- Registration Form -->
+    <div id="registerSection">
+      <h1>Create Account</h1>
+      <p class="auth-subtitle">Register to book or manage parking slots</p>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <input id="name" type="text" placeholder="John Doe" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input id="email" type="email" placeholder="john@example.com" required autocomplete="email">
+          <div class="small">We'll send OTP to verify your email</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password <span class="required">*</span></label>
+          <input id="password" type="password" placeholder="Min 6 characters" minlength="6" required autocomplete="new-password">
+          <div class="small">Use a secure password with numbers & letters</div>
+        </div>
+
+        <div class="form-group">
+          <label for="role">I want to <span class="required">*</span></label>
+          <select id="role" required>
+            <option value="">— Select your role —</option>
+            <option value="USER">🚗 Book Parking Slots</option>
+            <option value="OWNER">🏢 Manage & Earn from Slots</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-full">Create Account →</button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account?
+        <a href="/login">Login</a>
+      </div>
+    </div>
+
+    <!-- OTP Verification Form -->
+    <div id="otpSection" style="display:none;">
+      <h1>Verify Email</h1>
+      <p class="auth-subtitle">Enter the OTP sent to your email</p>
+
+      <form id="otpForm">
+        <div class="form-group">
+          <label for="otp">6-Digit OTP Code <span class="required">*</span></label>
+          <input id="otp" type="text" placeholder="123456" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" required>
+          <div class="small">Check your email inbox (or spam folder)</div>
+        </div>
+
+        <button type="submit" class="btn-full">Verify & Complete Registration →</button>
+      </form>
+
+      <div class="auth-footer">
+        <a href="#" onclick="resetForm()">← Back to Register</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let registeredEmail = '';
+
+  function setMsg(text, isErr) {
+    const el = document.getElementById('msg');
+    el.className = 'message ' + (isErr ? 'error' : 'success');
+    el.innerHTML = (isErr ? '&#9888; ' : '&#10003; ') + text;
+  }
+
+  function resetForm() {
+    document.getElementById('registerSection').style.display = 'block';
+    document.getElementById('otpSection').style.display = 'none';
+    document.getElementById('msg').innerHTML = '';
+    document.getElementById('registerForm').reset();
+    document.getElementById('otpForm').reset();
+  }
+
+  document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = "Registering...";
+
+    try {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const role = document.getElementById('role').value;
+
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to register");
+      }
+
+      registeredEmail = email;
+      setMsg("✓ Registration successful! Check your email for OTP", false);
+
+      setTimeout(() => {
+        document.getElementById('registerSection').style.display = 'none';
+        document.getElementById('otpSection').style.display = 'block';
+        document.getElementById('msg').innerHTML = '';
+      }, 1000);
+
+    } catch (err) {
+      setMsg(err.message, true);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Create Account →";
+    }
+  });
+
+  document.getElementById('otpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = "Verifying...";
+
+    try {
+      const otp = document.getElementById('otp').value.trim();
+
+      const res = await fetch('/api/auth/verify-otp?email=' + encodeURIComponent(registeredEmail) + '&code=' + otp, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Invalid OTP");
+      }
+
+      setMsg("✓ Email verified! Redirecting to login...", false);
+
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 1500);
+
+    } catch (err) {
+      setMsg(err.message, true);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Verify OTP →";
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate Experience – SmartPark</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="topbar-brand">SmartPark</a>
+  <div class="topbar-nav">
+    <a href="/user-dashboard" class="btn btn-secondary btn-sm">Dashboard</a>
+    <a href="/payment" class="btn btn-secondary btn-sm">Payment</a>
+  </div>
+</div>
+
+<div class="container-sm">
+
+  <div class="card rating-card">
+
+    <div class="card-header">
+      <div class="card-title">⭐ Rate Your Experience</div>
+    </div>
+
+    <div id="msg" class="message"></div>
+
+    <form id="ratingForm">
+
+      <div class="form-group">
+        <label>Booking ID <span class="required">*</span></label>
+        <input id="bookingId" type="number" placeholder="e.g. 5" min="1" required>
+        <div class="small">Which booking do you want to rate?</div>
+      </div>
+
+      <div class="form-group">
+        <label>Your Rating <span class="required">*</span></label>
+        <div class="stars" id="starContainer">
+          <span class="star" data-val="1">★</span>
+          <span class="star" data-val="2">★</span>
+          <span class="star" data-val="3">★</span>
+          <span class="star" data-val="4">★</span>
+          <span class="star" data-val="5">★</span>
+        </div>
+        <input id="score" type="hidden">
+        <div id="scoreLabel" class="small rating-label"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Your Feedback <span class="small">(optional)</span></label>
+        <textarea id="comment" placeholder="What was your parking experience?" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="btn-full rating-btn">
+        ✓ Submit Rating →
+      </button>
+
+    </form>
+  </div>
+
+  <div class="hint">
+    ℹ️ Rate only <span class="badge badge-completed">COMPLETED</span> bookings after payment
+  </div>
+
+</div>
+
+<script>
+  /* YOUR EXISTING JS — UNCHANGED */
+  const labels = ['','Poor','Fair','Good','Very Good','Excellent'];
+  const stars = document.querySelectorAll('.star');
+  const scoreInput = document.getElementById('score');
+  const scoreLabel = document.getElementById('scoreLabel');
+
+  stars.forEach(s => {
+    s.addEventListener('mouseenter', () => {
+      const v = +s.dataset.val;
+      stars.forEach(x => x.classList.toggle('on', +x.dataset.val <= v));
+      scoreLabel.textContent = labels[v];
+    });
+    s.addEventListener('click', () => { scoreInput.value = s.dataset.val; });
+  });
+  document.getElementById('starContainer').addEventListener('mouseleave', () => {
+    const v = +scoreInput.value || 0;
+    stars.forEach(x => x.classList.toggle('on', +x.dataset.val <= v));
+    scoreLabel.textContent = v ? labels[v] : '';
+  });
+</script>
+
+</body>
+</html>

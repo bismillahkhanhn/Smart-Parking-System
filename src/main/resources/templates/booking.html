@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Slot – SmartPark</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="topbar-brand">SmartPark</a>
+  <div class="topbar-nav">
+    <a href="/parking-list" class="btn btn-secondary btn-sm">← Back to Slots</a>
+    <a href="/user-dashboard" class="btn btn-secondary btn-sm">Dashboard</a>
+  </div>
+</div>
+
+<div class="container-sm">
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📅 Create a Booking</div>
+    </div>
+
+    <div id="msg" class="message"></div>
+
+    <form id="bookingForm">
+      <input id="userId" type="hidden">
+
+      <div class="form-group">
+        <label>Select Slot ID <span class="required">*</span></label>
+        <input id="slotId" type="number" placeholder="e.g. 1" min="1" required>
+        <div class="small">💡 Browse <a href="/parking-list"><strong>available slots</strong></a> to get the ID and price</div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label>Start Time <span class="required">*</span></label>
+          <input id="startTime" type="datetime-local" required>
+          <div class="small">When you'll park</div>
+        </div>
+
+        <div class="form-group">
+          <label>End Time <span class="required">*</span></label>
+          <input id="endTime" type="datetime-local" required>
+          <div class="small">When you'll leave</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-full">Reserve Slot →</button>
+    </form>
+  </div>
+
+  <div class="hint">
+    <strong>📋 Booking Flow:</strong><br>
+    <span class="badge badge-pending">PENDING</span> Waiting for owner approval<br>
+    <span class="badge badge-approved">APPROVED</span> Ready for payment<br>
+    <span class="badge badge-completed">COMPLETED</span> After payment, then rate
+  </div>
+
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
